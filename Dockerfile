@@ -77,12 +77,12 @@ RUN dotnet publish Jellyfin.Server --disable-parallel --configuration Release --
 
 FROM app
 
-ENV HEALTHCHECK_URL=http://localhost:8096/health
+ENV HEALTHCHECK_URL=http://localhost:8080/health
 
 COPY --from=builder /jellyfin /jellyfin
 COPY --from=web-builder /dist /jellyfin/jellyfin-web
 
-EXPOSE 8096
+EXPOSE 8080
 VOLUME /cache /config
 ENTRYPOINT ["./jellyfin/jellyfin", \
     "--datadir", "/config", \
